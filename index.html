@@ -7,16 +7,37 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
+:root {
+  --bg1: #0a192f;
+  --bg2: #112240;
+  --bg3: #1e3a8a;
+  --card: rgba(255, 255, 255, 0.06);
+  --text: #fff;
+  --accent: #3b82f6;
+  --accent2: #60a5fa;
+}
+
+body.light {
+  --bg1: #f8fafc;
+  --bg2: #e2e8f0;
+  --bg3: #dbeafe;
+  --card: rgba(0, 0, 0, 0.04);
+  --text: #1e293b;
+  --accent: #2563eb;
+  --accent2: #3b82f6;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
 }
 
 body {
-  background: linear-gradient(135deg, #0a192f, #112240, #1e3a8a);
-  color: #fff;
+  background: linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
+  color: var(--text);
   min-height: 100vh;
 }
 
@@ -25,18 +46,25 @@ header {
   padding: 25px 20px;
   text-align: center;
   box-shadow: 0 8px 30px rgba(37, 99, 235, 0.5);
+  position: relative;
 }
 
 header h1 {
   font-size: 2.8rem;
   font-weight: 700;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 
-header p {
-  font-size: 1.1rem;
-  opacity: 0.95;
-  margin-top: 5px;
+.theme-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255,255,255,0.2);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 50px;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
 }
 
 .container {
@@ -52,19 +80,18 @@ header p {
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--card);
   border-radius: 20px;
   padding: 22px;
   backdrop-filter: blur(12px);
   border: 1px solid rgba(96, 165, 250, 0.2);
-  transition: all 0.4s ease;
   cursor: pointer;
 }
 
 .card:hover {
   transform: translateY(-12px);
   box-shadow: 0 15px 40px rgba(59, 130, 246, 0.6);
-  border-color: #3b82f6;
+  border-color: var(--accent);
 }
 
 .card img {
@@ -73,24 +100,19 @@ header p {
   object-fit: cover;
   border-radius: 15px;
   margin-bottom: 15px;
+  background: white;
 }
 
 .card h3 {
   font-size: 1.4rem;
   margin-bottom: 8px;
-  color: #60a5fa;
-}
-
-.card p {
-  font-size: 0.95rem;
-  opacity: 0.85;
-  margin-bottom: 15px;
+  color: var(--accent2);
 }
 
 .price {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #3b82f6;
+  color: var(--accent);
 }
 
 .modal {
@@ -105,7 +127,6 @@ header p {
   z-index: 2000;
   align-items: center;
   justify-content: center;
-  animation: fadeIn 0.3s ease;
 }
 
 .modal.active {
@@ -113,28 +134,11 @@ header p {
 }
 
 .modal-content {
-  background: linear-gradient(135deg, #1e3a8a, #2563eb);
+  background: linear-gradient(135deg, var(--bg3), var(--accent));
   padding: 35px;
   border-radius: 25px;
   max-width: 550px;
   width: 90%;
-  box-shadow: 0 20px 60px rgba(37, 99, 235, 0.7);
-  animation: slideUp 0.4s ease;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slideUp {
-  from { transform: translateY(50px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-
-.modal-content h2 {
-  margin-bottom: 20px;
-  color: #fff;
 }
 
 .modal-buttons {
@@ -151,7 +155,6 @@ header p {
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
-  transition: all 0.3s ease;
 }
 
 .btn-cart {
@@ -160,31 +163,9 @@ header p {
   border: 2px solid white;
 }
 
-.btn-cart:hover {
-  background: white;
-  color: #1e3a8a;
-}
-
 .btn-buy {
   background: #10b981;
   color: white;
-}
-
-.btn-buy:hover {
-  background: #059669;
-  transform: scale(1.05);
-}
-
-.close-btn {
-  float: right;
-  font-size: 28px;
-  cursor: pointer;
-  color: white;
-  opacity: 0.7;
-}
-
-.close-btn:hover {
-  opacity: 1;
 }
 
 .delivery-info {
@@ -192,17 +173,7 @@ header p {
   padding: 20px;
   border-radius: 15px;
   margin-top: 20px;
-  border-left: 4px solid #60a5fa;
-}
-
-.delivery-info h4 {
-  color: #60a5fa;
-  margin-bottom: 10px;
-}
-
-.delivery-info p {
-  margin: 8px 0;
-  font-size: 0.95rem;
+  border-left: 4px solid var(--accent2);
 }
 
 .rider-info {
@@ -213,17 +184,6 @@ header p {
   padding: 15px;
   background: rgba(255, 255, 255, 0.08);
   border-radius: 12px;
-}
-
-.rider-avatar {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #3b82f6, #60a5fa);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
 }
 
 .whatsapp-btn {
@@ -238,18 +198,14 @@ header p {
   align-items: center;
   justify-content: center;
   box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
-  transition: all 0.3s ease;
   z-index: 1000;
 }
 
-.whatsapp-btn:hover {
-  transform: scale(1.15);
-}
-
-.whatsapp-btn svg {
-  width: 35px;
-  height: 35px;
-  fill: white;
+.close-btn {
+  float: right;
+  font-size: 28px;
+  cursor: pointer;
+  opacity: 0.7;
 }
 
 footer {
@@ -257,12 +213,6 @@ footer {
   padding: 40px 20px;
   margin-top: 80px;
   border-top: 1px solid rgba(96, 165, 250, 0.2);
-  opacity: 0.8;
-}
-
-@media(max-width: 768px) {
-  header h1 { font-size: 2rem; }
-  .modal-content { padding: 25px; }
 }
 </style>
 </head>
@@ -271,58 +221,73 @@ footer {
 <header>
   <h1>TechZone</h1>
   <p>Premium Computer Parts & Accessories</p>
+  <button class="theme-btn" onclick="toggleTheme()">🌙/☀️</button>
 </header>
 
 <div class="container">
   <div class="products">
     
-    <div class="card" onclick="openModal('RGB Gaming RAM', 'High performance DDR4 RGB RAM 16GB 3200MHz', 'Rs. 8,500', 'attachment://0')">
-      <img src="attachment://0" alt="RAM">
-      <h3>RGB Gaming RAM</h3>
-      <p>High performance DDR4 RGB RAM for gaming</p>
-      <div class="price">Rs. 8,500</div>
-    </div>
-
-    <div class="card" onclick="openModal('Desktop RAM 8GB', 'Fast DDR4 memory 8GB 2666MHz', 'Rs. 3,200', 'attachment://1')">
-      <img src="attachment://1" alt="RAM">
-      <h3>Desktop RAM 8GB</h3>
-      <p>Fast and reliable DDR4 memory</p>
-      <div class="price">Rs. 3,200</div>
-    </div>
-
-    <div class="card" onclick="openModal('HP Laptop', 'Slim laptop Windows 11 ready', 'Rs. 75,000', 'attachment://2')">
-      <img src="attachment://2" alt="Laptop">
+    <div class="card" onclick="openModal('HP Laptop', 'Slim laptop Windows 11 ready', 'Rs. 75,000', 'laptop.jpg')">
+      <img src="laptop.jpg" alt="Laptop">
       <h3>HP Laptop</h3>
       <p>Slim and powerful laptop</p>
       <div class="price">Rs. 75,000</div>
     </div>
 
-    <div class="card" onclick="openModal('Samsung USB Drive', '32GB USB 3.1 Flash Drive', 'Rs. 1,800', 'attachment://3')">
-      <img src="attachment://3" alt="USB">
+    <div class="card" onclick="openModal('RGB Gaming RAM', 'High performance DDR4 RGB RAM 16GB 3200MHz', 'Rs. 8,500', 'ram2.jpg')">
+      <img src="ram2.jpg" alt="RAM">
+      <h3>RGB Gaming RAM</h3>
+      <p>XPG RGB RAM 16GB</p>
+      <div class="price">Rs. 8,500</div>
+    </div>
+
+    <div class="card" onclick="openModal('Desktop RAM 8GB', 'Fast DDR4 memory 8GB 2666MHz', 'Rs. 3,200', 'ram1.jpg')">
+      <img src="ram1.jpg" alt="RAM">
+      <h3>Desktop RAM 8GB</h3>
+      <p>Fast and reliable DDR4 memory</p>
+      <div class="price">Rs. 3,200</div>
+    </div>
+
+    <div class="card" onclick="openModal('HDMI to VGA Cable', 'Convert HDMI to VGA easily', 'Rs. 850', 'hdmi.jpg')">
+      <img src="hdmi.jpg" alt="HDMI">
+      <h3>HDMI to VGA Cable</h3>
+      <p>Plug and play converter</p>
+      <div class="price">Rs. 850</div>
+    </div>
+
+    <div class="card" onclick="openModal('Samsung USB Drive', '32GB USB 3.1 Flash Drive', 'Rs. 1,800', 'usb.jpg')">
+      <img src="usb.jpg" alt="USB">
       <h3>Samsung USB Drive</h3>
       <p>Super fast data transfer</p>
       <div class="price">Rs. 1,800</div>
     </div>
 
-    <div class="card" onclick="openModal('External Hard Drive', '1TB Portable HDD shock proof', 'Rs. 9,500', 'attachment://4')">
-      <img src="attachment://4" alt="HDD">
+    <div class="card" onclick="openModal('External Hard Drive', '1TB Portable HDD shock proof', 'Rs. 9,500', 'hdd.jpg')">
+      <img src="hdd.jpg" alt="HDD">
       <h3>External Hard Drive</h3>
       <p>1TB Portable HDD</p>
       <div class="price">Rs. 9,500</div>
     </div>
 
-    <div class="card" onclick="openModal('VGA Cable', 'High quality VGA to VGA cable', 'Rs. 650', 'attachment://5')">
-      <img src="attachment://5" alt="VGA">
+    <div class="card" onclick="openModal('VGA Cable', 'High quality VGA to VGA cable', 'Rs. 650', 'vga.jpg')">
+      <img src="vga.jpg" alt="VGA">
       <h3>VGA Cable</h3>
       <p>Monitor connection cable</p>
       <div class="price">Rs. 650</div>
     </div>
 
-    <div class="card" onclick="openModal('HDMI to VGA Cable', 'Convert HDMI to VGA easily', 'Rs. 850', 'attachment://6')">
-      <img src="attachment://6" alt="HDMI">
-      <h3>HDMI to VGA Cable</h3>
-      <p>Plug and play converter</p>
-      <div class="price">Rs. 850</div>
+    <div class="card" onclick="openModal('RGB Mechanical Keyboard', 'Compact 60% RGB Mechanical Keyboard', 'Rs. 6,200', 'keyboard.jpg')">
+      <img src="keyboard.jpg" alt="Keyboard">
+      <h3>RGB Mechanical Keyboard</h3>
+      <p>Compact RGB Mechanical Keyboard</p>
+      <div class="price">Rs. 6,200</div>
+    </div>
+
+    <div class="card" onclick="openModal('RGB Gaming Mouse', 'Professional FPS Gaming Mouse with RGB Lights', 'Rs. 4,500', 'mouse.jpg')">
+      <img src="mouse.jpg" alt="Mouse">
+      <h3>RGB Gaming Mouse</h3>
+      <p>Professional FPS Gaming Mouse</p>
+      <div class="price">Rs. 4,500</div>
     </div>
 
   </div>
@@ -342,10 +307,10 @@ footer {
       <p><strong>Payment:</strong> Cash on Delivery Available</p>
       
       <div class="rider-info">
-        <div class="rider-avatar">🏍️</div>
+        <div>🏍️</div>
         <div>
           <strong>Rider: Ahmed Khan</strong><br>
-          <small>Contact: 03XX-XXXXXXX<br>Rated 4.8 ⭐</small>
+          <small>Rated 4.8 ⭐ | Fast Delivery</small>
         </div>
       </div>
     </div>
@@ -358,9 +323,8 @@ footer {
 </div>
 
 <a href="https://wa.me/923001234567" class="whatsapp-btn" target="_blank">
-  <svg viewBox="0 0 32 32">
+  <svg width="35" height="35" viewBox="0 0 32 32" fill="white">
     <path d="M16.001 3.2c-7.06 0-12.8 5.74-12.8 12.8 0 2.26 0.59 4.47 1.71 6.42l-1.79 6.54 6.71-1.76c1.89 1.03 4.02 1.57 6.17 1.57h0.001c7.06 0 12.8-5.74 12.8-12.8s-5.74-12.8-12.8-12.8zm0 23.2c-1.93 0-3.82-0.52-5.47-1.5l-0.39-0.23-3.98 1.04 1.06-3.88-0.25-0.4c-1.07-1.72-1.64-3.7-1.64-5.74 0-5.96 4.85-10.8 10.8-10.8s10.8 4.84 10.8 10.8c0 5.96-4.85 10.8-10.8 10.8z"/>
-    <path d="M23.34 18.66c-0.33-0.17-1.95-0.96-2.25-1.07s-0.52-0.17-0.74 0.17-0.85 1.07-1.04 1.29-0.38 0.25-0.71 0.08c-0.33-0.17-1.39-0.51-2.65-1.63-0.98-0.87-1.64-1.95-1.83-2.28s-0.02-0.51 0.14-0.67c0.14-0.14 0.33-0.36 0.49-0.54s0.22-0.3 0.33-0.5c0.11-0.2 0.06-0.38-0.03-0.54s-0.74-1.78-1.01-2.44c-0.27-0.64-0.54-0.55-0.74-0.56l-0.63-0.01c-0.22 0-0.57 0.08-0.87 0.4s-1.14 1.11-1.14 2.71 1.17 3.15 1.33 3.37c0.17 0.22 2.3 3.51 5.57 4.92 0.78 0.34 1.39 0.54 1.87 0.69 0.78 0.25 1.49 0.21 2.05 0.13 0.63-0.09 1.95-0.8 2.23-1.57s0.28-1.43 0.2-1.57c-0.08-0.14-0.3-0.22-0.63-0.39z"/>
   </svg>
 </a>
 
@@ -377,7 +341,6 @@ function openModal(title, desc, price, img) {
   document.getElementById('modalPrice').innerText = price;
   currentProduct = title;
   
-  // Set delivery date to 3 days from now
   const today = new Date();
   today.setDate(today.getDate() + 3);
   const options = { day: 'numeric', month: 'long', year: 'numeric' };
@@ -397,6 +360,10 @@ function addToCart() {
 
 function buyNow() {
   window.open('https://wa.me/923001234567?text=Hi, I want to buy ' + encodeURIComponent(currentProduct), '_blank');
+}
+
+function toggleTheme() {
+  document.body.classList.toggle('light');
 }
 
 window.onclick = function(event) {
